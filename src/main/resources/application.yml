@@ -1,0 +1,25 @@
+#----------------------------------
+# Database Configuration
+#----------------------------------
+#spring:
+#  datasource:
+#    url:
+#    username: card_accountubr
+#    password: card_accountubrqa
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    hikari:
+#      pool-name: card_accountubr
+#      auto-commit: false
+#      maximum-pool-size: 20
+#      connection-timeout: 5000
+#      connection-init-sql: SELECT 1
+#  jpa:
+#    database-platform: org.hibernate.dialect.MySQL57InnoDBDialect
+#    hibernate:
+#      naming:
+#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+
+starwars:
+    url: https://swapi.co/
+    userAgent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36
