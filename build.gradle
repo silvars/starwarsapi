@@ -21,12 +21,14 @@ dependencies {
 	compile("org.springframework.cloud:spring-cloud-starter-openfeign:2.1.0.RELEASE")
 	compile("org.springframework:spring-context-support")
 
-	compile("com.h2database:h2")
+	/* DATABASE*/
+	compile('mysql:mysql-connector-java:8.0.15')
+	compile('org.liquibase:liquibase-core')
 
+	/* CACHE */
 	compile('com.github.ben-manes.caffeine:caffeine:2.7.0')
 
 	compile("org.apache.commons:commons-lang3:3.8.1")
-
 
 	/* Swagger */
 	compile("io.springfox:springfox-swagger2:2.9.2")

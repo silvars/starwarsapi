@@ -1,0 +1,39 @@
+databaseChangeLog:
+- preConditions:
+  - runningAs:
+      username: starwars
+
+- changeSet:
+    id: 1
+    author: Leonardo
+    changes:
+    - createTable:
+        tableName: PLANET
+        columns:
+        - column:
+            name: PLANET_ID
+            type: int
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+              nullable: false
+        - column:
+            name: NAME
+            type: varchar(250)
+            constraints:
+              nullable: false
+        - column:
+            name: CLIMATE
+            type: varchar(250)
+            constraints:
+              nullable: false
+        - column:
+            name: TERRAIN
+            type: varchar(250)
+            constraints:
+              nullable: false
+        - column:
+            name: APPARITIONS
+            type: int
+            constraints:
+              nullable: false

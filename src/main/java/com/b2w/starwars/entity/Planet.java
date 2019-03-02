@@ -23,7 +23,8 @@ import javax.persistence.Table;
 public class Planet {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "PLANET_ID")
     private Long planetId;
 
     @Column(name = "NAME", nullable = false)
