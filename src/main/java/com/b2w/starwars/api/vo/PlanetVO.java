@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -20,10 +22,13 @@ public class PlanetVO {
 
     private Long planetId;
 
+    @NotEmpty(message = "Informe o nome do planeta")
     private String name;
 
+    @NotNull(message = "Informe o clima do planeta")
     private String climate;
 
+    @NotNull(message = "Informe o tipo de terreno do planeta")
     private String terrain;
 
     private List<String> films;

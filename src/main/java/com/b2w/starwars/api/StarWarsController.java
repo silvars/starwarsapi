@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
@@ -48,7 +49,7 @@ public class StarWarsController {
     @ApiOperation(
             value = "Cria um novo planeta no banco de dados"
     )
-    public PlanetVO createPlanet(@RequestBody PlanetVO planetVO) throws PlanetNotFoundException,
+    public PlanetVO createPlanet(@RequestBody @Valid PlanetVO planetVO) throws PlanetNotFoundException,
             PlanetAlreadyExistsException {
         log.info("I=Criando um novo planeta, planetVO={}", planetVO);
         return starWarsPlanetCreator.createPlanet(planetVO);

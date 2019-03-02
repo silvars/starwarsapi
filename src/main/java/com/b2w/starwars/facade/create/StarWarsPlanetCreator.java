@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
+
 import static com.b2w.starwars.CacheConfiguration.CACHE_PLANETS_DATABASE;
 
 @Slf4j
