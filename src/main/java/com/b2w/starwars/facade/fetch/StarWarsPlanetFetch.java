@@ -3,6 +3,7 @@ package com.b2w.starwars.facade.fetch;
 import com.b2w.starwars.api.vo.PlanetVO;
 import com.b2w.starwars.entity.Planet;
 import com.b2w.starwars.exception.PlanetIdUninformedException;
+import com.b2w.starwars.exception.PlanetNameUninformedException;
 import com.b2w.starwars.exception.PlanetNotFoundException;
 import com.b2w.starwars.feign.StarWarsPlanetFeign;
 import com.b2w.starwars.service.StarWarsPlanetService;
@@ -35,7 +36,7 @@ public class StarWarsPlanetFetch {
     private StarWarsPlanetFeign starWarsPlanetFeign;
 
     @Cacheable(value = CACHE_PLANETS_BY_NAME)
-    public PlanetVO fetchPlanetByName(String name) throws PlanetNotFoundException, PlanetIdUninformedException {
+    public PlanetVO fetchPlanetByName(String name) throws PlanetNotFoundException, PlanetNameUninformedException {
         Validator.validatePlanetName(name);
         Planet planet = starWarsPlanetService.fetchPlanetByName(name);
 
@@ -48,7 +49,7 @@ public class StarWarsPlanetFetch {
     }
 
     @Cacheable(value = CACHE_PLANETS_BY_EXACT_NAME)
-    public PlanetVO fetchPlanetByExactName(String name) throws PlanetNotFoundException, PlanetIdUninformedException {
+    public PlanetVO fetchPlanetByExactName(String name) throws PlanetNotFoundException, PlanetNameUninformedException {
         Validator.validatePlanetName(name);
         Planet planet = starWarsPlanetService.fetchPlanetByExactName(name);
 

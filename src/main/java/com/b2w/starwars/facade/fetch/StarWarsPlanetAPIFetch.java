@@ -2,7 +2,7 @@ package com.b2w.starwars.facade.fetch;
 
 import com.b2w.starwars.api.vo.PlanetVO;
 import com.b2w.starwars.api.vo.ResultVO;
-import com.b2w.starwars.exception.PlanetIdUninformedException;
+import com.b2w.starwars.exception.PlanetNameUninformedException;
 import com.b2w.starwars.exception.PlanetNotFoundException;
 import com.b2w.starwars.feign.StarWarsPlanetFeign;
 import com.b2w.starwars.util.Validator;
@@ -30,7 +30,7 @@ public class StarWarsPlanetAPIFetch {
     private StarWarsPlanetFeign starWarsPlanetFeign;
 
     @Cacheable(value = CACHE_PLANETS_BY_NAME_API, key = "#planetVO.name")
-    public void findPlanetByNameAPI(PlanetVO planetVO) throws PlanetNotFoundException, PlanetIdUninformedException {
+    public PlanetVO findPlanetByNameAPI(PlanetVO planetVO) throws PlanetNotFoundException, PlanetNameUninformedException {
         Validator.validatePlanetName(planetVO.getName());
         log.info("I=Buscando planeta na API por nome, planetVO={}", planetVO);
         ResultVO results = starWarsPlanetFeign.fetchByName(MediaType.APPLICATION_JSON.toString(),
@@ -53,6 +53,8 @@ public class StarWarsPlanetAPIFetch {
             log.error("E=Planeta não encontrado na API StarWars, planetVO={}", planetVO);
             throw new PlanetNotFoundException("Planeta não encontrado na API StarWars");
         }
+
+        return planetVO;
     }
 
     @Cacheable(CACHE_PLANETS_API)

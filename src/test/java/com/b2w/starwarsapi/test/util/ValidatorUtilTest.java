@@ -1,6 +1,9 @@
 package com.b2w.starwarsapi.test.util;
 
+import com.b2w.starwars.api.vo.PlanetVO;
 import com.b2w.starwars.exception.PlanetIdUninformedException;
+import com.b2w.starwars.exception.PlanetNameUninformedException;
+import com.b2w.starwars.exception.PlanetUninformedException;
 import com.b2w.starwars.util.Validator;
 import org.junit.Test;
 
@@ -17,17 +20,27 @@ public class ValidatorUtilTest {
     }
 
     @Test
-    public void validatePlanetName() throws PlanetIdUninformedException {
+    public void validatePlanetName() throws PlanetNameUninformedException {
         Validator.validatePlanetName("nome");
     }
 
-    @Test(expected = PlanetIdUninformedException.class)
-    public void validatePlanetNameUninformed() throws PlanetIdUninformedException {
+    @Test(expected = PlanetNameUninformedException.class)
+    public void validatePlanetNameUninformed() throws PlanetNameUninformedException {
         Validator.validatePlanetName(null);
     }
 
-    @Test(expected = PlanetIdUninformedException.class)
-    public void validatePlanetNameBlank() throws PlanetIdUninformedException {
+    @Test(expected = PlanetNameUninformedException.class)
+    public void validatePlanetNameBlank() throws PlanetNameUninformedException {
         Validator.validatePlanetName("");
+    }
+
+    @Test
+    public void validatePlanet() throws PlanetUninformedException {
+        Validator.validatePlanetVO(new PlanetVO());
+    }
+
+    @Test(expected = PlanetUninformedException.class)
+    public void validatePlanetNull() throws PlanetUninformedException {
+        Validator.validatePlanetVO(null);
     }
 }
