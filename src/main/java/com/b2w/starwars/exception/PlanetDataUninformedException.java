@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value= HttpStatus.BAD_REQUEST)
-public class PlanetNameUninformedException extends Exception {
+public class PlanetDataUninformedException extends Exception {
 
-    public PlanetNameUninformedException(String message) {
+    public PlanetDataUninformedException(String message) {
         super(message);
     }
 }

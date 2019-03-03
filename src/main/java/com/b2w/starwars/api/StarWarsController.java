@@ -2,8 +2,8 @@ package com.b2w.starwars.api;
 
 import com.b2w.starwars.api.vo.PlanetVO;
 import com.b2w.starwars.exception.PlanetAlreadyExistsException;
+import com.b2w.starwars.exception.PlanetDataUninformedException;
 import com.b2w.starwars.exception.PlanetIdUninformedException;
-import com.b2w.starwars.exception.PlanetNameUninformedException;
 import com.b2w.starwars.exception.PlanetNotFoundException;
 import com.b2w.starwars.exception.PlanetUninformedException;
 import com.b2w.starwars.facade.create.StarWarsPlanetCreator;
@@ -53,7 +53,7 @@ public class StarWarsController {
             value = "Cria um novo planeta no banco de dados"
     )
     public PlanetVO createPlanet(@RequestBody @Valid PlanetVO planetVO) throws PlanetNotFoundException,
-            PlanetAlreadyExistsException, PlanetNameUninformedException, PlanetUninformedException {
+            PlanetAlreadyExistsException, PlanetUninformedException, PlanetDataUninformedException {
         log.info("I=Criando um novo planeta, planetVO={}", planetVO);
         return starWarsPlanetCreator.createPlanet(planetVO);
     }
@@ -66,7 +66,7 @@ public class StarWarsController {
     @ApiOperation(
             value = "Lista todos os planetas contidos no banco de dados"
     )
-    public List<PlanetVO> fetchAllPlanetsFromDatabase() {
+    public List<PlanetVO> fetchAllPlanetsFromDatabase() throws PlanetNotFoundException {
         log.info("I=Buscando todos os planetas no banco de dados");
         return starWarsPlanetFetch.fetchAllPlanetsFromDatabase();
     }
@@ -96,7 +96,7 @@ public class StarWarsController {
             value = "Lista um planeta dado o seu nome"
     )
     public PlanetVO fetchPlanetFromDatabaseByName(@PathVariable("name") String name)
-            throws PlanetNotFoundException, PlanetNameUninformedException {
+            throws PlanetNotFoundException, PlanetDataUninformedException {
         log.info("I=Buscando planeta pelo nome, name={}", name);
         return starWarsPlanetFetch.fetchPlanetByName(name);
     }
@@ -113,7 +113,7 @@ public class StarWarsController {
             value = "Lista um planeta dado o seu nome"
     )
     public PlanetVO fetchPlanetFromDatabaseByExactName(@PathVariable("name") String name)
-            throws PlanetNotFoundException, PlanetNameUninformedException {
+            throws PlanetNotFoundException, PlanetDataUninformedException {
         log.info("I=Buscando planeta pelo nome, name={}", name);
         return starWarsPlanetFetch.fetchPlanetByExactName(name);
     }

@@ -3,7 +3,7 @@ package com.b2w.starwarsapi.test.facace.create;
 import com.b2w.starwars.api.vo.PlanetVO;
 import com.b2w.starwars.entity.Planet;
 import com.b2w.starwars.exception.PlanetAlreadyExistsException;
-import com.b2w.starwars.exception.PlanetNameUninformedException;
+import com.b2w.starwars.exception.PlanetDataUninformedException;
 import com.b2w.starwars.exception.PlanetNotFoundException;
 import com.b2w.starwars.exception.PlanetUninformedException;
 import com.b2w.starwars.facade.create.StarWarsPlanetCreator;
@@ -35,7 +35,7 @@ public class StarWarsPlanetCreatorTest extends StarWarsAbstractTest {
     PlanetVO planetVOWithNameExist= new PlanetVO();
 
     @Before
-    public void setUp() throws PlanetNotFoundException, PlanetNameUninformedException {
+    public void setUp() throws PlanetNotFoundException, PlanetDataUninformedException, PlanetUninformedException {
         Mockito.when(starWarsPlanetService.planetExists(existe)).thenReturn(true);
         Mockito.when(starWarsPlanetService.planetExists(naoExiste)).thenReturn(false);
 
@@ -47,7 +47,7 @@ public class StarWarsPlanetCreatorTest extends StarWarsAbstractTest {
     }
 
     @Test
-    public void createPlanet() throws PlanetNameUninformedException, PlanetAlreadyExistsException,
+    public void createPlanet() throws PlanetDataUninformedException, PlanetAlreadyExistsException,
             PlanetNotFoundException, PlanetUninformedException {
         PlanetVO planetVO = new PlanetVO();
         planetVO.setName(naoExiste);
@@ -66,8 +66,26 @@ public class StarWarsPlanetCreatorTest extends StarWarsAbstractTest {
         Assert.assertTrue(planetResult.getClimate().equals(climate));
     }
 
+    @Test(expected = PlanetAlreadyExistsException.class)
+    public void createPlanetAlreadyExists() throws PlanetDataUninformedException, PlanetAlreadyExistsException,
+            PlanetNotFoundException, PlanetUninformedException {
+        starWarsPlanetCreator.createPlanet(planetVOWithNameExist);
+    }
+
+    @Test(expected = PlanetUninformedException.class)
+    public void createPlanetNull() throws PlanetDataUninformedException, PlanetAlreadyExistsException,
+            PlanetNotFoundException, PlanetUninformedException {
+        starWarsPlanetCreator.createPlanet(null);
+    }
+
+    @Test(expected = PlanetDataUninformedException.class)
+    public void createPlanetDataUninformed() throws PlanetDataUninformedException, PlanetAlreadyExistsException,
+            PlanetNotFoundException, PlanetUninformedException {
+        starWarsPlanetCreator.createPlanet(new PlanetVO());
+    }
+
     @Test(expected = PlanetNotFoundException.class)
-    public void createPlanetNotFoundAPI() throws PlanetNameUninformedException, PlanetAlreadyExistsException,
+    public void createPlanetNotFoundAPI() throws PlanetDataUninformedException, PlanetAlreadyExistsException,
             PlanetNotFoundException, PlanetUninformedException {
         starWarsPlanetCreator.createPlanet(planetVOWithNameNotExist);
     }

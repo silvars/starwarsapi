@@ -25,14 +25,12 @@ public class StarWarsPlanetService {
 
     @Transactional(readOnly = true)
     public Planet fetchPlanetByName(String name) throws PlanetNotFoundException {
-        log.info("Buscando sem cache");
         return starWarsRepository.findByNameContainingIgnoreCase(name)
                 .orElseThrow(() -> new PlanetNotFoundException("Planeta não encontrado"));
     }
 
     @Transactional(readOnly = true)
     public Planet fetchPlanetByExactName(String name) throws PlanetNotFoundException {
-        log.info("Buscando sem cache");
         return starWarsRepository.findByNameIgnoreCase(name)
                 .orElseThrow(() -> new PlanetNotFoundException("Planeta não encontrado"));
     }
@@ -55,7 +53,6 @@ public class StarWarsPlanetService {
 
     @Transactional(readOnly = true)
     public Iterable<Planet> fetchAllPlanetsFromDatabase() {
-        log.info("Buscou sem cache");
         return starWarsRepository.findAll();
     }
 

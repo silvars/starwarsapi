@@ -3,7 +3,7 @@ package com.b2w.starwars.facade.create;
 import com.b2w.starwars.api.vo.PlanetVO;
 import com.b2w.starwars.entity.Planet;
 import com.b2w.starwars.exception.PlanetAlreadyExistsException;
-import com.b2w.starwars.exception.PlanetNameUninformedException;
+import com.b2w.starwars.exception.PlanetDataUninformedException;
 import com.b2w.starwars.exception.PlanetNotFoundException;
 import com.b2w.starwars.exception.PlanetUninformedException;
 import com.b2w.starwars.facade.fetch.StarWarsPlanetAPIFetch;
@@ -28,7 +28,7 @@ public class StarWarsPlanetCreator {
 
     @CacheEvict(value = {CACHE_PLANETS_DATABASE}, allEntries = true)
     public PlanetVO createPlanet(PlanetVO planetVO)
-            throws PlanetNotFoundException, PlanetAlreadyExistsException, PlanetNameUninformedException,
+            throws PlanetNotFoundException, PlanetAlreadyExistsException, PlanetDataUninformedException,
             PlanetUninformedException {
         validateIfExist(planetVO);
         planetVO = starWarsPlanetAPIFetch.findPlanetByNameAPI(planetVO);
@@ -49,10 +49,9 @@ public class StarWarsPlanetCreator {
     }
 
     public void validateIfExist(PlanetVO planetVO)
-            throws PlanetAlreadyExistsException, PlanetNameUninformedException, PlanetUninformedException {
+            throws PlanetAlreadyExistsException, PlanetDataUninformedException, PlanetUninformedException {
         log.info("I=Verificando se o planeta já não está cadastrado, planetVo={}", planetVO);
-        Validator.validatePlanetVO(planetVO);
-        Validator.validatePlanetName(planetVO.getName());
+        Validator.validatePlanetName(planetVO);
         if(starWarsPlanetService.planetExists(planetVO.getName())) {
             log.error("E=Planeta já cadastrado, planetVO={}", planetVO);
             throw new PlanetAlreadyExistsException("Planeta já cadastrado");
