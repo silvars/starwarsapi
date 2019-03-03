@@ -2,6 +2,7 @@ package com.b2w.starwars.api;
 
 import com.b2w.starwars.api.vo.PlanetVO;
 import com.b2w.starwars.exception.PlanetAlreadyExistsException;
+import com.b2w.starwars.exception.PlanetIdUninformedException;
 import com.b2w.starwars.exception.PlanetNotFoundException;
 import com.b2w.starwars.facade.create.StarWarsPlanetCreator;
 import com.b2w.starwars.facade.delete.StarWarsPlanetDelete;
@@ -50,7 +51,7 @@ public class StarWarsController {
             value = "Cria um novo planeta no banco de dados"
     )
     public PlanetVO createPlanet(@RequestBody @Valid PlanetVO planetVO) throws PlanetNotFoundException,
-            PlanetAlreadyExistsException {
+            PlanetAlreadyExistsException, PlanetIdUninformedException {
         log.info("I=Criando um novo planeta, planetVO={}", planetVO);
         return starWarsPlanetCreator.createPlanet(planetVO);
     }
@@ -92,7 +93,8 @@ public class StarWarsController {
     @ApiOperation(
             value = "Lista um planeta dado o seu nome"
     )
-    public PlanetVO fetchPlanetFromDatabaseByName(@PathVariable("name") String name) throws PlanetNotFoundException {
+    public PlanetVO fetchPlanetFromDatabaseByName(@PathVariable("name") String name)
+            throws PlanetNotFoundException, PlanetIdUninformedException {
         log.info("I=Buscando planeta pelo nome, name={}", name);
         return starWarsPlanetFetch.fetchPlanetByName(name);
     }
@@ -108,7 +110,8 @@ public class StarWarsController {
     @ApiOperation(
             value = "Lista um planeta dado o seu nome"
     )
-    public PlanetVO fetchPlanetFromDatabaseByExactName(@PathVariable("name") String name) throws PlanetNotFoundException {
+    public PlanetVO fetchPlanetFromDatabaseByExactName(@PathVariable("name") String name)
+            throws PlanetNotFoundException, PlanetIdUninformedException {
         log.info("I=Buscando planeta pelo nome, name={}", name);
         return starWarsPlanetFetch.fetchPlanetByExactName(name);
     }
@@ -124,7 +127,8 @@ public class StarWarsController {
     @ApiOperation(
             value = "Lista um planeta dado o seu ID"
     )
-    public PlanetVO fetchPlanetFromDatabaseById(@PathVariable("id") Long planetId) throws PlanetNotFoundException {
+    public PlanetVO fetchPlanetFromDatabaseById(@PathVariable("id") Long planetId)
+            throws PlanetNotFoundException, PlanetIdUninformedException {
         log.info("I=Buscando planeta pelo ID, planetId={}", planetId);
         return starWarsPlanetFetch.fetchPlanetById(planetId);
     }
@@ -137,7 +141,7 @@ public class StarWarsController {
     @ApiOperation(
             value = "Remove um planeta"
     )
-    public void deletePlanet(@PathVariable Long planetId) throws PlanetNotFoundException {
+    public void deletePlanet(@PathVariable Long planetId) throws PlanetNotFoundException, PlanetIdUninformedException {
         log.info("I=Removendo um planeta, planetId={}", planetId);
         starWarsPlanetDelete.deletePlanet(planetId);
     }

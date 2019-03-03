@@ -2,6 +2,7 @@ package com.b2w.starwars.util;
 
 import com.b2w.starwars.exception.PlanetIdUninformedException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
 
@@ -18,9 +19,7 @@ public class Validator {
     }
 
     public static void validatePlanetName(String planetName) throws PlanetIdUninformedException {
-        try {
-            Objects.requireNonNull(planetName);
-        } catch (NullPointerException e) {
+        if(StringUtils.isBlank(planetName)) {
             log.error("Nome do planeta não foi informado");
             throw new PlanetIdUninformedException("Nome do planeta não foi informado");
         }
