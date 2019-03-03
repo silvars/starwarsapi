@@ -15,4 +15,6 @@ public abstract class StarWarsAbstractTest {
 
     protected static final String existe = "existe";
     protected static final String naoExiste = "naoExiste";
+    protected static final String climate = "climate";
+    protected static final String terrain = "terrain";
 }

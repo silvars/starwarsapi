@@ -62,8 +62,8 @@ public class StarWarsPlanetCreatorTest extends StarWarsAbstractTest {
         Assert.assertTrue(planetResult.getPlanetId().equals(1L));
         Assert.assertTrue(planetResult.getName().equals(naoExiste));
         Assert.assertTrue(planetResult.getApparitions().equals(1));
-        Assert.assertTrue(planetResult.getTerrain().equals("terra"));
-        Assert.assertTrue(planetResult.getClimate().equals("clima"));
+        Assert.assertTrue(planetResult.getTerrain().equals(terrain));
+        Assert.assertTrue(planetResult.getClimate().equals(climate));
     }
 
     @Test(expected = PlanetNotFoundException.class)
@@ -78,8 +78,8 @@ public class StarWarsPlanetCreatorTest extends StarWarsAbstractTest {
         planet.setPlanetId(1L);
         planet.setName(naoExiste);
         planet.setApparitions(1);
-        planet.setTerrain("terra");
-        planet.setClimate("clima");
+        planet.setTerrain(terrain);
+        planet.setClimate(climate);
 
         return planet;
     }
