@@ -31,9 +31,6 @@ public class StarWarsPlanetCreatorTest extends StarWarsAbstractTest {
     @MockBean
     private StarWarsPlanetAPIFetch starWarsPlanetAPIFetch;
 
-    private String existe = "existe";
-    private String naoExiste = "naoExiste";
-
     PlanetVO planetVOWithNameNotExist = new PlanetVO();
     PlanetVO planetVOWithNameExist= new PlanetVO();
 

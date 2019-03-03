@@ -13,5 +13,6 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @SpringBootTest(webEnvironment = RANDOM_PORT, classes = StarwarsapiApplication.class)
 public abstract class StarWarsAbstractTest {
 
-
+    protected static final String existe = "existe";
+    protected static final String naoExiste = "naoExiste";
 }
