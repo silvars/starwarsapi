@@ -28,9 +28,6 @@ import static com.b2w.starwars.CacheConfiguration.CACHE_PLANETS_DATABASE;
 @Component
 public class StarWarsPlanetFetch {
 
-    @Value("${starwars.userAgent}")
-    private String userAgent;
-
     @Autowired
     private StarWarsPlanetService starWarsPlanetService;
 
