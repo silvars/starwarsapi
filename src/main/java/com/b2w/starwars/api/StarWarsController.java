@@ -79,7 +79,7 @@ public class StarWarsController {
     @ApiOperation(
             value = "Lista todos os planetas contidos na API do Star Wars"
     )
-    public List<PlanetVO> fetchAllPlanetsFromAPI() {
+    public List<PlanetVO> fetchAllPlanetsFromAPI() throws PlanetNotFoundException {
         log.info("I=Buscando todos os planetas na API");
         return starWarsPlanetAPIFetch.fetchAllPlanetsFromAPI();
     }

@@ -8,6 +8,7 @@ import com.b2w.starwars.exception.PlanetUninformedException;
 import com.b2w.starwars.feign.StarWarsPlanetFeign;
 import com.b2w.starwars.util.Validator;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
@@ -33,7 +34,7 @@ public class StarWarsPlanetAPIFetch {
     @Cacheable(value = CACHE_PLANETS_BY_NAME_API, key = "#planetVO.name")
     public PlanetVO findPlanetByNameAPI(PlanetVO planetVO)
             throws PlanetNotFoundException, PlanetDataUninformedException, PlanetUninformedException {
-        Validator.validatePlanetVO(planetVO);
+        Validator.validatePlanetName(planetVO);
         log.info("I=Buscando planeta na API por nome, planetVO={}", planetVO);
         ResultVO results = starWarsPlanetFeign.fetchByName(MediaType.APPLICATION_JSON.toString(),
                 userAgent, planetVO.getName());
@@ -42,8 +43,6 @@ public class StarWarsPlanetAPIFetch {
             log.error("E=Planeta não encontrado na API StarWars, planetVO={}", planetVO);
             throw new PlanetNotFoundException("Planeta não encontrado na API StarWars");
         }
-
-        log.info("I=Planetas encontrados na API, planetas={}", results.getResults());
 
         results.getResults().stream().forEach((planet) -> {
             if(planet.getName().equalsIgnoreCase(planetVO.getName())) {
@@ -60,11 +59,15 @@ public class StarWarsPlanetAPIFetch {
     }
 
     @Cacheable(CACHE_PLANETS_API)
-    public List<PlanetVO> fetchAllPlanetsFromAPI() {
+    public List<PlanetVO> fetchAllPlanetsFromAPI() throws PlanetNotFoundException {
         List<PlanetVO> planetVOS = new ArrayList<>();
         Integer page = 1;
 
         ResultVO result = starWarsPlanetFeign.fetch(MediaType.APPLICATION_JSON.toString(), userAgent, page);
+
+        if(CollectionUtils.isEmpty(result.getResults())) {
+            throw new PlanetNotFoundException("Não retornou nenhum planeta");
+        }
 
         planetVOS.addAll(createPlanet(result));
 
@@ -93,7 +96,7 @@ public class StarWarsPlanetAPIFetch {
                     .name(planetVO.getName())
                     .terrain(planetVO.getTerrain())
                     .climate(planetVO.getClimate())
-                    .apparitions(planetVO.getFilms().size())
+                    .apparitions(CollectionUtils.isNotEmpty(planetVO.getFilms()) ? planetVO.getFilms().size() : 0)
                     .build());
         }));
 
