@@ -28,6 +28,7 @@ dependencies {
 	/* CACHE */
 	compile('com.github.ben-manes.caffeine:caffeine:2.7.0')
 
+	/* APACHE */
 	compile("org.apache.commons:commons-lang3:3.8.1")
 	compile("org.apache.httpcomponents:httpclient:4.5.7")
 	compile("org.apache.commons:commons-collections4:4.3")

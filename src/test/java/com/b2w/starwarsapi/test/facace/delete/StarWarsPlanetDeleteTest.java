@@ -3,7 +3,6 @@ package com.b2w.starwarsapi.test.facace.delete;
 import com.b2w.starwars.exception.PlanetIdUninformedException;
 import com.b2w.starwars.exception.PlanetNotFoundException;
 import com.b2w.starwars.facade.delete.StarWarsPlanetDelete;
-import com.b2w.starwars.feign.StarWarsPlanetFeign;
 import com.b2w.starwars.service.StarWarsPlanetService;
 import com.b2w.starwarsapi.test.StarWarsAbstractTest;
 import org.junit.Test;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
 
 public class StarWarsPlanetDeleteTest extends StarWarsAbstractTest {
 

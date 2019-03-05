@@ -2,13 +2,11 @@ package com.b2w.starwarsapi.test.facace.fetch;
 
 import com.b2w.starwars.api.vo.PlanetVO;
 import com.b2w.starwars.entity.Planet;
-import com.b2w.starwars.exception.PlanetDataUninformedException;
 import com.b2w.starwars.exception.PlanetIdUninformedException;
 import com.b2w.starwars.exception.PlanetNotFoundException;
 import com.b2w.starwars.facade.fetch.StarWarsPlanetFetch;
 import com.b2w.starwars.service.StarWarsPlanetService;
 import com.b2w.starwarsapi.test.StarWarsAbstractTest;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,6 @@ import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
 
 public class StarWarsPlanetFetchByIdTest extends StarWarsAbstractTest {
 

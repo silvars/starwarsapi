@@ -2,7 +2,6 @@ package com.b2w.starwarsapi.test.facace.fetch;
 
 import com.b2w.starwars.api.vo.PlanetVO;
 import com.b2w.starwars.api.vo.ResultVO;
-import com.b2w.starwars.entity.Planet;
 import com.b2w.starwars.exception.PlanetNotFoundException;
 import com.b2w.starwars.facade.fetch.StarWarsPlanetAPIFetch;
 import com.b2w.starwars.feign.StarWarsPlanetFeign;
@@ -10,9 +9,7 @@ import com.b2w.starwarsapi.test.StarWarsAbstractTest;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -12,17 +12,13 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 public class StarWarsPlanetFetchByNameAPITest extends StarWarsAbstractTest {
 
@@ -81,15 +77,5 @@ public class StarWarsPlanetFetchByNameAPITest extends StarWarsAbstractTest {
                 .build());
 
         return planetVOS;
-    }
-
-    private PlanetVO createPlanetVO() {
-        return PlanetVO.builder().name(name)
-                .apparitions(apparitions)
-                .climate(climate)
-                .terrain(terrain)
-                .films(new ArrayList<>())
-                .planetId(planetId)
-                .build();
     }
 }
