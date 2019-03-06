@@ -1,5 +1,7 @@
-# starwarsapi
+# STAR WARS API
 
+Antes de rodar a aplicação devemos criar o database e o usuario/senha no banco de dados.
+Para criar siga as instruções abaixo:
 
 ## Criando a base de dados no MySql
 create database starwarsapi; -- Create the new database
