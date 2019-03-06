@@ -1,6 +1,7 @@
 package com.b2w.starwarsapi.test.api.fetch;
 
 import com.b2w.starwars.exception.PlanetNotFoundException;
+import com.b2w.starwars.facade.fetch.StarWarsPlanetAPIFetch;
 import com.b2w.starwars.facade.fetch.StarWarsPlanetFetch;
 import com.b2w.starwarsapi.test.StarWarsAbstractTest;
 import org.junit.Before;
@@ -17,35 +18,36 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class StarWarsPlanetFetchAllDatabaseControllerTest extends StarWarsAbstractTest {
+public class StarWarsPlanetFetchAllAPIControllerTest extends StarWarsAbstractTest {
 
     private MockMvc mockMvc;
 
     @MockBean
-    private StarWarsPlanetFetch starWarsPlanetFetch;
+    private StarWarsPlanetAPIFetch starWarsPlanetAPIFetch;
 
     @Autowired
     private WebApplicationContext webApplicationContext;
 
     @Before
     public void setUp() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
+                .build();
     }
 
     @Test
     public void fetchAllPlanetsDatabase() throws Exception {
-        Mockito.when(starWarsPlanetFetch.fetchAllPlanetsFromDatabase()).thenReturn(createPlanetVOs());
+        Mockito.when(starWarsPlanetAPIFetch.fetchAllPlanetsFromAPI()).thenReturn(createPlanetVOs());
 
-        mockMvc.perform(get("/planet/"))
+        mockMvc.perform(get("/planet/fecthFromApi"))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$", hasSize(5)));
     }
 
     @Test
     public void fetchByNamePlanetNotFound() throws Exception {
-        Mockito.when(starWarsPlanetFetch.fetchAllPlanetsFromDatabase()).thenThrow(PlanetNotFoundException.class);
+        Mockito.when(starWarsPlanetAPIFetch.fetchAllPlanetsFromAPI()).thenThrow(PlanetNotFoundException.class);
 
-        mockMvc.perform(get("/planet/"))
+        mockMvc.perform(get("/planet/fecthFromApi"))
                 .andExpect(status().is4xxClientError())
                 .andExpect(status().isNotFound());
     }
