@@ -39,7 +39,7 @@ public class StarWarsPlanetFetchByNameControllerTest extends StarWarsAbstractTes
     public void fetchPlanetByName() throws Exception {
         Mockito.when(starWarsPlanetFetch.fetchPlanetByName(anyString())).thenReturn(createPlanetVO());
 
-        mockMvc.perform(get("/planet/byName/{name}", 1L))
+        mockMvc.perform(get(PLANET_NAME_URL, planetId))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.planetId", is(1)))
                 .andExpect(jsonPath("$.name", is(name)))
@@ -52,13 +52,13 @@ public class StarWarsPlanetFetchByNameControllerTest extends StarWarsAbstractTes
     public void fetchByNamePlanetNotFound() throws Exception {
         Mockito.when(starWarsPlanetFetch.fetchPlanetByName(anyString())).thenThrow(PlanetNotFoundException.class);
 
-        mockMvc.perform(get("/planet/byName/{name}", 1L)).andExpect(status().is4xxClientError());
+        mockMvc.perform(get(PLANET_NAME_URL, planetId)).andExpect(status().is4xxClientError());
     }
 
     @Test
     public void fetchByIdPlanetNameUninformed() throws Exception {
         Mockito.when(starWarsPlanetFetch.fetchPlanetByName(anyString())).thenThrow(PlanetDataUninformedException.class);
 
-        mockMvc.perform(get("/planet/byName/{name}", 1L)).andExpect(status().is4xxClientError());
+        mockMvc.perform(get(PLANET_NAME_URL, planetId)).andExpect(status().is4xxClientError());
     }
 }

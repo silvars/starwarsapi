@@ -18,6 +18,13 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @SpringBootTest(webEnvironment = RANDOM_PORT, classes = StarwarsapiApplication.class)
 public abstract class StarWarsAbstractTest {
 
+    protected static final String PLANET_URL = "/planet";
+    protected static final String PLANET_ID_URL = PLANET_URL + "/{planetId}";
+    protected static final String PLANET_FETCH_ID_URL = PLANET_URL + "/byId/{id}";
+    protected static final String PLANET_NAME_URL = PLANET_URL + "/byName/{name}";
+    protected static final String PLANET_EXACT_NAME_URL = PLANET_URL + "/byExactName/{name}";
+    protected static final String PLANET_FETCH_API_URL = PLANET_URL + "/fetchFromApi";
+
     protected static final String existe = "existe";
     protected static final String naoExiste = "naoExiste";
 

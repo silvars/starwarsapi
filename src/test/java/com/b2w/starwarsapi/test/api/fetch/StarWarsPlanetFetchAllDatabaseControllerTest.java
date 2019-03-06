@@ -36,8 +36,8 @@ public class StarWarsPlanetFetchAllDatabaseControllerTest extends StarWarsAbstra
     public void fetchAllPlanetsDatabase() throws Exception {
         Mockito.when(starWarsPlanetFetch.fetchAllPlanetsFromDatabase()).thenReturn(createPlanetVOs());
 
-        mockMvc.perform(get("/planet/"))
-                .andExpect(status().is2xxSuccessful())
+        mockMvc.perform(get(PLANET_URL))
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(5)));
     }
 
@@ -45,8 +45,6 @@ public class StarWarsPlanetFetchAllDatabaseControllerTest extends StarWarsAbstra
     public void fetchByNamePlanetNotFound() throws Exception {
         Mockito.when(starWarsPlanetFetch.fetchAllPlanetsFromDatabase()).thenThrow(PlanetNotFoundException.class);
 
-        mockMvc.perform(get("/planet/"))
-                .andExpect(status().is4xxClientError())
-                .andExpect(status().isNotFound());
+        mockMvc.perform(get(PLANET_URL)).andExpect(status().isNotFound());
     }
 }

@@ -75,7 +75,7 @@ public class StarWarsController {
      * Listar planetas da API do Star Wars
      * @return
      */
-    @GetMapping("/fecthFromApi")
+    @GetMapping("/fetchFromApi")
     @ApiOperation(
             value = "Lista todos os planetas contidos na API do Star Wars"
     )

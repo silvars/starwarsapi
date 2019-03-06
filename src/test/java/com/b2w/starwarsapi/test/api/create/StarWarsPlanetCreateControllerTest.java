@@ -55,7 +55,7 @@ public class StarWarsPlanetCreateControllerTest extends StarWarsAbstractTest {
         Mockito.when(starWarsPlanetCreator.createPlanet(any())).thenReturn(createPlanetVO());
         byte[] json = convertObjectToJsonBytes(createPlanetVO());
 
-        mockMvc.perform(post("/planet").contentType(MediaType.APPLICATION_JSON).content(json))
+        mockMvc.perform(post(PLANET_URL).contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(status().isCreated());
     }
@@ -65,7 +65,7 @@ public class StarWarsPlanetCreateControllerTest extends StarWarsAbstractTest {
         Mockito.when(starWarsPlanetCreator.createPlanet(any())).thenThrow(PlanetNotFoundException.class);
         byte[] json = convertObjectToJsonBytes(createPlanetVO());
 
-        mockMvc.perform(post("/planet").contentType(MediaType.APPLICATION_JSON).content(json))
+        mockMvc.perform(post(PLANET_URL).contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isNotFound());
     }
 
@@ -74,7 +74,7 @@ public class StarWarsPlanetCreateControllerTest extends StarWarsAbstractTest {
         Mockito.when(starWarsPlanetCreator.createPlanet(any())).thenThrow(PlanetDataUninformedException.class);
         byte[] json = convertObjectToJsonBytes(createPlanetVO());
 
-        mockMvc.perform(post("/planet").contentType(MediaType.APPLICATION_JSON).content(json))
+        mockMvc.perform(post(PLANET_URL).contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isBadRequest());
     }
 
@@ -83,7 +83,7 @@ public class StarWarsPlanetCreateControllerTest extends StarWarsAbstractTest {
         Mockito.when(starWarsPlanetCreator.createPlanet(any())).thenThrow(PlanetUninformedException.class);
         byte[] json = convertObjectToJsonBytes(createPlanetVO());
 
-        mockMvc.perform(post("/planet").contentType(MediaType.APPLICATION_JSON).content(json))
+        mockMvc.perform(post(PLANET_URL).contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isBadRequest());
     }
 
@@ -92,7 +92,7 @@ public class StarWarsPlanetCreateControllerTest extends StarWarsAbstractTest {
         Mockito.when(starWarsPlanetCreator.createPlanet(any())).thenThrow(PlanetAlreadyExistsException.class);
         byte[] json = convertObjectToJsonBytes(createPlanetVO());
 
-        mockMvc.perform(post("/planet").contentType(MediaType.APPLICATION_JSON).content(json))
+        mockMvc.perform(post(PLANET_URL).contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isConflict());
     }
 }

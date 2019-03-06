@@ -37,7 +37,7 @@ public class StarWarsPlanetDeleteControllerTest extends StarWarsAbstractTest {
     public void deletePlanet() throws Exception {
         doNothing().when(starWarsPlanetDelete).deletePlanet(anyLong());
 
-        mockMvc.perform(delete("/planet/{planetId}", 1L))
+        mockMvc.perform(delete(PLANET_ID_URL, 1L))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(status().isAccepted());
     }
@@ -46,7 +46,7 @@ public class StarWarsPlanetDeleteControllerTest extends StarWarsAbstractTest {
     public void deletePlanetNotFound() throws Exception {
         doThrow(PlanetNotFoundException.class).when(starWarsPlanetDelete).deletePlanet(anyLong());
 
-        mockMvc.perform(delete("/planet/{planetId}", 1L))
+        mockMvc.perform(delete(PLANET_ID_URL, 1L))
                 .andExpect(status().is4xxClientError())
                 .andExpect(status().isNotFound());
     }
